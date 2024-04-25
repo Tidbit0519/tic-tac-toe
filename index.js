@@ -114,13 +114,19 @@ const GameController = () => {
         }
 
 		return winner
-	}
+    }
+    
+    const restartGame = () => {
+        gameboard = Gameboard()
+        currentPlayer = players[0]
+    }
 
 	return {
 		getCurrentPlayer,
 		playRound,
 		getBoard,
-		checkWinner,
+        checkWinner,
+        restartGame
 	}
 }
 
@@ -130,9 +136,10 @@ function main() {
 	const gameBoardDiv = document.querySelector(".game-board")
 
     const updatePlayerTurn = () => {
-        const winner = gameController.checkWinner()
+		const winner = gameController.checkWinner()
+		playerTurnDiv.style.width = "0.1%"
 		if (winner) {
-			playerTurnDiv.textContent = `${winner.name} wins!`
+			playerTurnDiv.textContent = `${winner.name} win!`
 		} else if (
 			gameController
 				.getBoard()
@@ -145,6 +152,8 @@ function main() {
 				gameController.getCurrentPlayer().name
 			}'s Turn`
 		}
+		playerTurnDiv.style.animation =
+			"typing 2s steps(40, end) forwards, blink-caret .75s step-end infinite"
 	}
 
 	const updateGameBoard = () => {
@@ -172,10 +181,33 @@ function main() {
 		gameController.playRound(row, column)
 		updateGameBoard()
 		updatePlayerTurn()
-	}
+    }
+    
+    // function restartGame() {
+    //     const restartButton = document.querySelector(".restart-btn")
+    //     restartButton.addEventListener("click", () => {
+    //         console.log("Restarting game")
+    //         gameController.restartGame()
+    //     })
+    // }
 
+    // restartGame()
 	updatePlayerTurn()
 	updateGameBoard()
 }
 
-document.addEventListener("DOMContentLoaded", main)
+document.addEventListener("DOMContentLoaded", function () {
+	var gameTitle = document.querySelector(".game-title")
+	var playerTurn = document.querySelector(".player-turn")
+
+	gameTitle.addEventListener("animationend", function (e) {
+		if (e.animationName === "typing") {
+			gameTitle.style.animation = "none"
+			gameTitle.style.borderRight = "none"
+			setTimeout(function () {
+				main()
+			}, 500)
+		}
+	})
+})
+

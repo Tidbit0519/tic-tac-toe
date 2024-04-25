@@ -129,13 +129,115 @@ table {
     border-spacing: 0;
 }
 
+/* Global */
+
+html{
+    height: 100vh;
+}
+
+body {
+    font-family: "Oxanium", sans-serif;
+    color: aliceblue;
+    background-image: url("./assets/background-img.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 15% 0;
+}
+
+button {
+    font-family: "Oxanium", sans-serif;
+}
+
 .container {
     width: 100%;
-    margin: 2rem;
-    padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 20px;
+}
+
+/* Title */
+.game-title {
+    font-size: xx-large;
+    font-weight: bolder;
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation:
+        typing 2s steps(40, end),
+        blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+    from {
+        width: 0
+    }
+    to {
+        width: 100%
+    }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+    from,
+    to {
+        border-color: transparent
+    }
+    50% {
+        border-color: orange;
+    }
+}
+
+/* Turn */
+.player-turn {
+    font-size: x-large;
+    font-weight: bold;
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation: none;
+    width: 0.1%;
+}
+
+/* Restart Button */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.restart-btn {
+    padding: 1rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: large;
+}
+
+
+/* Gameboard */
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell {
+    padding: 1rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    font-size: xx-large;
 }
