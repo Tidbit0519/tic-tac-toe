@@ -128,3 +128,14 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+.container {
+    width: 100%;
+    margin: 2rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
