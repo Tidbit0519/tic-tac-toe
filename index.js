@@ -68,10 +68,59 @@ const GameController = () => {
 		return gameboard.getBoard()
 	}
 
+	const checkWinner = () => {
+        const board = gameboard.getBoard().map((row) => row.map((cell) => cell.getValue()))
+
+		let winner = null
+		for (let i = 0; i < 3; i++) {
+			if (
+				board[i][0] !== "" &&
+				board[i][0] === board[i][1] &&
+				board[i][0] === board[i][2]
+            ) {
+                console.log("Found a winner!")
+				winner = players.find(
+					(player) => player.mark === board[i][0]
+				)
+			}
+		}
+
+		for (let i = 0; i < 3; i++) {
+			if (
+				board[0][i] !== "" &&
+				board[0][i] === board[1][i] &&
+				board[0][i] === board[2][i]
+			) {
+				winner = players.find(
+					(player) => player.mark === board[0][i]
+				)
+			}
+		}
+
+		if (
+			board[0][0] !== "" &&
+			board[0][0] === board[1][1] &&
+			board[0][0] === board[2][2]
+		) {
+			winner = players.find((player) => player.mark === board[0][0])
+		}
+
+		if (
+			board[0][2] !== "" &&
+			board[0][2] === board[1][1] &&
+			board[0][2] === board[2][0]
+		) {
+			winner = players.find((player) => player.mark === board[0][2])
+        }
+
+		return winner
+	}
+
 	return {
 		getCurrentPlayer,
 		playRound,
 		getBoard,
+		checkWinner,
 	}
 }
 
@@ -80,10 +129,22 @@ function main() {
 	const playerTurnDiv = document.querySelector(".player-turn")
 	const gameBoardDiv = document.querySelector(".game-board")
 
-	const updatePlayerTurn = () => {
-		playerTurnDiv.textContent = `${
-			gameController.getCurrentPlayer().name
-		}'s Turn`
+    const updatePlayerTurn = () => {
+        const winner = gameController.checkWinner()
+		if (winner) {
+			playerTurnDiv.textContent = `${winner.name} wins!`
+		} else if (
+			gameController
+				.getBoard()
+				.flat()
+				.every((cell) => cell.getValue() !== "")
+		) {
+			playerTurnDiv.textContent = "Draw!"
+		} else {
+			playerTurnDiv.textContent = `${
+				gameController.getCurrentPlayer().name
+			}'s Turn`
+		}
 	}
 
 	const updateGameBoard = () => {
