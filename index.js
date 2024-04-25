@@ -1,119 +1,120 @@
-import inquirer from 'inquirer';
-
 const Gameboard = () => {
-    const rows = 3;
-    const columns = 3;
-    const board = [];
+	const rows = 3
+	const columns = 3
+	const board = []
 
-    for (let i = 0; i < rows; i++) {
-        board.push([]);
-        for (let j = 0; j < columns; j++) {
-            board[i].push(Cell());
-        }
-    }
+	for (let i = 0; i < rows; i++) {
+		board.push([])
+		for (let j = 0; j < columns; j++) {
+			board[i].push(Cell())
+		}
+	}
 
-    const placeMark = (row, column, mark) => {
-        board[row][column].addMark(mark);
-    }
+	const placeMark = (row, column, mark) => {
+		board[row][column].addMark(mark)
+	}
 
-    const getBoard = () => {
-        return board;
-    }
+	const getBoard = () => {
+		return board
+	}
 
-    const printBoard = () => {
-        console.log("----------");
-        for (let i = 0; i < rows; i++) {
-            process.stdout.write("| ")
-            for (let j = 0; j < columns; j++) {
-                process.stdout.write(board[i][j].getValue() + " | ")
-            }
-            console.log("")
-            console.log("----------");
-        }
-    }
-
-    return {
-        placeMark,
-        getBoard,
-        printBoard
-    }
+	return {
+		placeMark,
+		getBoard,
+	}
 }
 
 const Cell = () => {
-    let value = "";
+	let value = ""
 
-    const addMark = (mark) => {
-        value = mark;
-    }
+	const addMark = (mark) => {
+		value = mark
+	}
 
-    const getValue = () => {
-        return value;
-    }
+	const getValue = () => {
+		return value
+	}
 
-    return {
-        addMark,
-        getValue
-    }
+	return {
+		addMark,
+		getValue,
+	}
 }
 
 const GameController = () => {
-    let gameboard = Gameboard();
+	let gameboard = Gameboard()
+	const players = [
+		{ name: "Player 1", mark: "X" },
+		{ name: "Player 2", mark: "O" },
+	]
+	let currentPlayer = players[0]
 
-    const players = [
-        { name: 'Player 1', mark: 'X' },
-        { name: 'Player 2', mark: 'O' }
-    ];
-    let currentPlayer = players[0];
+	const switchPlayer = () => {
+		currentPlayer = currentPlayer === players[0] ? players[1] : players[0]
+	}
 
-    const switchPlayer = () => {
-        currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
-        console.log(`\n${currentPlayer.name} turn`)
-    }
+	const getCurrentPlayer = () => {
+		return currentPlayer
+	}
 
-    const playRound = (row, column) => {
-        gameboard.placeMark(row, column, currentPlayer.mark);
-        gameboard.printBoard();
-        switchPlayer();
-    }
+	const playRound = (row, column) => {
+		if (gameboard.getBoard()[row][column].getValue() === "") {
+			gameboard.placeMark(row, column, currentPlayer.mark)
+			switchPlayer()
+		}
+	}
 
-    const printNewGame = () => {
-        gameboard.printBoard();
-        console.log(`\n${currentPlayer.name} turn`)
-    }
-    
-    const getBoard = () => {
-        console.log(gameboard.getBoard().length);
-        return gameboard.getBoard();
-    }
+	const getBoard = () => {
+		return gameboard.getBoard()
+	}
 
-    return {
-        playRound,
-        printNewGame,
-        getBoard
-    }
+	return {
+		getCurrentPlayer,
+		playRound,
+		getBoard,
+	}
 }
 
-async function main() {
-    const game = GameController();
-    game.printNewGame();
+function main() {
+	const gameController = GameController()
+	const playerTurnDiv = document.querySelector(".player-turn")
+	const gameBoardDiv = document.querySelector(".game-board")
 
-    const questions = [
-      {
-        type: "input",
-        name: "row",
-        message: "Enter row:",
-      },
-      {
-        type: "input",
-        name: "column",
-        message: "Enter column:",
-      },
-    ]
-    
-    while (true) {
-        const answers = await inquirer.prompt(questions);
-        game.playRound(answers.row, answers.column);
-    }
+	const updatePlayerTurn = () => {
+		playerTurnDiv.textContent = `${
+			gameController.getCurrentPlayer().name
+		}'s Turn`
+	}
+
+	const updateGameBoard = () => {
+		const board = gameController.getBoard()
+		gameBoardDiv.innerHTML = ""
+		board.forEach((row, rowIndex) => {
+			const rowDiv = document.createElement("div")
+			rowDiv.classList.add("row")
+			row.forEach((cell, columnIndex) => {
+				const cellButton = document.createElement("button")
+				cellButton.classList.add("cell")
+				cellButton.dataset.row = rowIndex
+				cellButton.dataset.column = columnIndex
+				cellButton.textContent = cell.getValue()
+				cellButton.addEventListener("click", cellClick)
+				rowDiv.appendChild(cellButton)
+			})
+			gameBoardDiv.appendChild(rowDiv)
+		})
+	}
+
+	function cellClick(event) {
+		const row = event.target.dataset.row
+		const column = event.target.dataset.column
+		gameController.playRound(row, column)
+		updateGameBoard()
+		updatePlayerTurn()
+	}
+
+	updatePlayerTurn()
+	updateGameBoard()
 }
 
-main();
+document.addEventListener("DOMContentLoaded", main)
