@@ -132,7 +132,7 @@ table {
 /* Global */
 
 html{
-    height: 100vh;
+    height: 100%;
 }
 
 body {
@@ -142,8 +142,8 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100%;
-    margin: 15% 0;
+    height: max-content;
+    margin: 10% 0;
 }
 
 button {
@@ -167,6 +167,7 @@ button {
     border-right: .15em solid orange;
     white-space: nowrap;
     margin: 0 auto;
+    margin-bottom: 2rem;
     letter-spacing: .15em;
     animation:
         typing 2s steps(40, end),
@@ -202,6 +203,7 @@ button {
     border-right: .15em solid orange;
     white-space: nowrap;
     margin: 0 auto;
+    margin-bottom: 2rem;
     letter-spacing: .15em;
     animation: none;
     width: 0.1%;
@@ -222,6 +224,32 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: large;
+    display: none;
+    animation: fade-in-btn 2s forwards;
+    background-color: rgba(0, 25, 59);
+    color: white;
+    
+    &:hover {
+        background-color: rgba(0, 30, 69);
+        transform: translateY(-3px);
+        box-shadow: 0 14px 32px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+        background-color: rgba(0, 38, 87);
+        transform: translateY(3px);
+        scale: 0.95;
+    }
+}
+
+@keyframes fade-in-btn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
 }
 
 
@@ -232,6 +260,17 @@ button {
     align-items: center;
 }
 
+
+@keyframes fade-in {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 0.9
+    }
+}
+
 .cell {
     padding: 1rem;
     border: 1px solid #000;
@@ -240,4 +279,14 @@ button {
     width: 100px;
     height: 100px;
     font-size: xx-large;
+    background-color: rgba(0, 25, 59, 0.9);
+
+    &:hover {
+        background-color: rgba(0, 30, 69, 0.9);
+    }
+
+    &:active {
+        background-color: rgba(0, 38, 87, 0.9);
+        scale: 0.95;
+    }
 }
