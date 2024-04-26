@@ -150,13 +150,73 @@ button {
     font-family: "Oxanium", sans-serif;
 }
 
-.container {
-    width: 100%;
+/* Main Menu*/
+.main-menu {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 20px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+input {
+    padding: 1rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: large;
+    width: 200px;
+    text-align: center;
+    background-color: rgba(0, 25, 59);
+    color: white;
+    font-family: "Oxanium", sans-serif;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.start-btn {
+    padding: 1rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: large;
+    background-color: rgba(0, 25, 59);
+    color: white;
+    font-family: "Oxanium", sans-serif;
+    width: 200px;
+
+    &:hover {
+        background-color: rgba(0, 30, 69);
+        transform: translateY(-3px);
+        box-shadow: 0 14px 32px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+        background-color: rgba(0, 38, 87);
+        transform: translateY(3px);
+        scale: 0.95;
+    }
+
+}
+
+/* Container */
+
+.board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    display: none;
 }
 
 /* Title */

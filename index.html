@@ -10,13 +10,23 @@
     <title>Tic Tac Toe</title>
 </head>
 <body>
-    <div class="container">
+    <div class="main-menu">
         <div class="title-container">
             <h1 class="game-title">The Ultimate Tic-Tac-Toe</h1>
         </div>
-            <div class="status">
-                <div class="player-turn"></div>
+        <form class="input-container">
+            <input type="text" class="player1" placeholder="Player 1 Name" required>
+            <input type="text" class="player2" placeholder="Player 2 Name" required>
+            <div class="btn-container">
+                <input type="submit" class="start-btn"></input>
             </div>
+        </form>
+    </div>
+
+    <div class="board-container">
+        <div class="status">
+            <div class="player-turn"></div>
+        </div>
         <div class="game-board"></div>
         <div class="btn-container">
             <button class="restart-btn">Restart?</button>

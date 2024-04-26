@@ -64,6 +64,12 @@ const GameController = () => {
 		return currentPlayer
 	}
 
+	const setPlayersName = (player1Name, player2Name) => {
+		players[0].name = player1Name
+		players[1].name = player2Name
+	
+	}
+
 	const playRound = (row, column) => {
 		if (gameboard.getBoard()[row][column].getValue() === "") {
 			gameboard.placeMark(row, column, currentPlayer.mark, currentPlayer.color)
@@ -134,6 +140,7 @@ const GameController = () => {
 
 	return {
 		getCurrentPlayer,
+		setPlayersName,
 		playRound,
 		getBoard,
         checkWinner,
@@ -143,8 +150,11 @@ const GameController = () => {
 
 function main() {
 	const gameController = GameController()
+	const mainMenu = document.querySelector(".main-menu")
+	const boardContainer = document.querySelector(".board-container")
 	const playerTurnDiv = document.querySelector(".player-turn")
 	const gameBoardDiv = document.querySelector(".game-board")
+	const startButton = document.querySelector(".start-btn")
 	const restartButton = document.querySelector(".restart-btn")
 
     const updatePlayerTurn = () => {
@@ -214,14 +224,43 @@ function main() {
 		updatePlayerTurn()
 		restartButton.style.display = "none"
 	}
-    
-	updatePlayerTurn()
-	setTimeout(() => {
-		gameBoardDiv.style.animation =
-			"fade-in 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) forwards"
-		updateGameBoard()
-	}, 10)
-	restartButton.addEventListener("click", restartGame)
+
+	function startGame() {
+		boardContainer.style.display = "flex"
+		updatePlayerTurn()
+		setTimeout(() => {
+			gameBoardDiv.style.animation =
+				"fade-in 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) forwards"
+			updateGameBoard()
+		}, 10)
+		restartButton.addEventListener("click", restartGame)
+	}
+
+	function checkPlayerName() {
+		const player1Name = document.querySelector('.player1').value.trim();
+		const player2Name = document.querySelector('.player2').value.trim();
+		if (player1Name === "" || player2Name === "") {
+			alert("Please enter player names")
+			startButton.disabled = true
+			return false
+		} else if (player1Name === player2Name) {
+			alert("Player names must be different")
+			return false
+		} else {
+			gameController.setPlayersName(player1Name, player2Name)
+			startButton.disabled = false
+			return true
+		}
+	}
+
+	startButton.addEventListener("click", (event) => {
+		event.preventDefault();
+		if (checkPlayerName()) {
+			mainMenu.style.display = "none"
+			startButton.style.display = "none"
+			startGame()
+		}
+	})
 }
 
 document.addEventListener("DOMContentLoaded", function () {
