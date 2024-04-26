@@ -97,9 +97,10 @@ function updatePlayerTurn(gameController, playerTurnDiv) {
 
 	if (winner) {
 		playerTurnDiv.textContent = `${winner.name} wins!`;
-		document.querySelector(".restart-btn").style.display = "block"; // Show restart button on win
+		document.querySelector(".restart-btn").style.display = "block";
 	} else if (gameController.getBoard().flat().every(cell => cell.getValue() !== "")) {
 		playerTurnDiv.textContent = "Draw!";
+		document.querySelector(".restart-btn").style.display = "block"
 	} else {
 		playerTurnDiv.textContent = `${gameController.getCurrentPlayer().name}'s Turn`;
 	}
