@@ -71,7 +71,7 @@ const checkGameWinner = (gameboard, players) => {
 		.map((row) => row.map((cell) => cell.getValue()))
 	const lines = [
 		...board,
-		...board[0].map((col, i) => board.map((row) => row[i])),
+		...board[0].map((i) => board.map((row) => row[i])),
 		[0, 1, 2].map((i) => board[i][i]),
 		[0, 1, 2].map((i) => board[2 - i][i]),
 	]
