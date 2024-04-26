@@ -174,7 +174,7 @@ input {
     font-size: large;
     width: 200px;
     text-align: center;
-    background-color: rgba(0, 25, 59);
+    background-color: rgba(36, 0, 70);
     color: white;
     font-family: "Oxanium", sans-serif;
 
@@ -189,23 +189,22 @@ input {
     border-radius: 5px;
     cursor: pointer;
     font-size: large;
-    background-color: rgba(0, 25, 59);
-    color: white;
     font-family: "Oxanium", sans-serif;
     width: 200px;
+    color: white    ;
+    background-color: rgba(60, 9, 108);
 
     &:hover {
-        background-color: rgba(0, 30, 69);
+        background-color: rgba(90, 24, 154);
         transform: translateY(-3px);
         box-shadow: 0 14px 32px 0 rgba(0, 0, 0, 0.3);
     }
 
     &:active {
-        background-color: rgba(0, 38, 87);
+        background-color: rgba(123, 44, 191);
         transform: translateY(3px);
         scale: 0.95;
     }
-
 }
 
 /* Container */
@@ -286,17 +285,17 @@ input {
     font-size: large;
     display: none;
     animation: fade-in-btn 2s forwards;
-    background-color: rgba(0, 25, 59);
+    background-color: rgba(60, 9, 108);
     color: white;
     
     &:hover {
-        background-color: rgba(0, 30, 69);
+        background-color: rgba(90, 24, 154);
         transform: translateY(-3px);
         box-shadow: 0 14px 32px 0 rgba(0, 0, 0, 0.3);
     }
 
     &:active {
-        background-color: rgba(0, 38, 87);
+        background-color: rgba(123, 44, 191);
         transform: translateY(3px);
         scale: 0.95;
     }
@@ -339,14 +338,17 @@ input {
     width: 100px;
     height: 100px;
     font-size: xx-large;
-    background-color: rgba(0, 25, 59, 0.9);
+    background-color: rgba(60, 9, 108);
 
     &:hover {
-        background-color: rgba(0, 30, 69, 0.9);
+        background-color: rgba(90, 24, 154);
+        transform: translateY(-3px);
+        box-shadow: 0 14px 32px 0 rgba(0, 0, 0, 0.3);
     }
 
     &:active {
-        background-color: rgba(0, 38, 87, 0.9);
+        background-color: rgba(123, 44, 191);
+        transform: translateY(3px);
         scale: 0.95;
     }
 }

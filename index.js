@@ -30,8 +30,8 @@ const Cell = () => {
 const GameController = () => {
 	let gameboard = Gameboard()
 	const players = [
-		{ name: "Player 1", mark: "X", color: "red" },
-		{ name: "Player 2", mark: "O", color: "blue" },
+		{ name: "Player 1", mark: "X", color: "lightcoral" },
+		{ name: "Player 2", mark: "O", color: "cyan" },
 	]
 	let currentPlayer = players[0]
 
