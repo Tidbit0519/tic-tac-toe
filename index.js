@@ -145,6 +145,7 @@ function main() {
 	const gameController = GameController()
 	const playerTurnDiv = document.querySelector(".player-turn")
 	const gameBoardDiv = document.querySelector(".game-board")
+	const restartButton = document.querySelector(".restart-btn")
 
     const updatePlayerTurn = () => {
 			const winner = gameController.checkWinner()
@@ -205,7 +206,14 @@ function main() {
 		gameController.playRound(row, column)
 		updateGameBoard()
 		updatePlayerTurn()
-    }
+	}
+	
+	function restartGame() {
+		gameController.restartGame()
+		updateGameBoard()
+		updatePlayerTurn()
+		restartButton.style.display = "none"
+	}
     
 	updatePlayerTurn()
 	setTimeout(() => {
@@ -213,6 +221,7 @@ function main() {
 			"fade-in 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) forwards"
 		updateGameBoard()
 	}, 10)
+	restartButton.addEventListener("click", restartGame)
 }
 
 document.addEventListener("DOMContentLoaded", function () {
